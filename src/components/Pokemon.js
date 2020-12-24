@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     dragon : {
         backgroundColor : '#7038f8'
     },
-    drak : {
+    dark : {
         backgroundColor : '#705848'
     },
     steel : {
