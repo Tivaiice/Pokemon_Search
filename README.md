@@ -1,3 +1,3 @@
-# Pokemon_Search
-
-## ใช้axios ในการ fetch Data pokemon
+# Pokemon Search
+  แอพดูตัวละครทั้งหมดใน Pokemon
+* ใช้axios ในการ fetch Data pokemon
