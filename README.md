@@ -9,13 +9,13 @@
 หน้าแรก
  
  
-*แอพจะมีช่องให้ป้อนข้อมูลชื่อ ตัวละครPokemon 
+* แอพจะมีช่องให้ป้อนข้อมูลชื่อ ตัวละครPokemon 
 
-*มีปุ่ม Search ให้กดค้น รายละเอียดของตัวละคร Pokemon 
+* มีปุ่ม Search ให้กดค้น รายละเอียดของตัวละคร Pokemon 
 
 [![Screen-Shot-2563-12-24-at-23-09-28.png](https://i.postimg.cc/fyfxzfbX/Screen-Shot-2563-12-24-at-23-09-28.png)](https://postimg.cc/zH3LpWKX)
 
-  * หลังจากที่ป้อนชื่อ Pokemonจะแสดงรายละเอียดของตัวละคร Pokemon
+* หลังจากที่ป้อนชื่อ Pokemonจะแสดงรายละเอียดของตัวละคร Pokemon
 
 [![Screen-Shot-2563-12-24-at-22-54-03.png](https://i.postimg.cc/y8b08d7f/Screen-Shot-2563-12-24-at-22-54-03.png)](https://postimg.cc/18D8Wyn6)
 
