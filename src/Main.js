@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View,Image, SafeAreaView, TextInput, Button, Alert, ActivityIndicator } from 'react-native'
+import { Text, StyleSheet, ImageBackground, View, Image, SafeAreaView, TextInput, Button, Alert, ActivityIndicator } from 'react-native'
 
 import axios from 'axios';
 import pokemon from 'pokemon';
@@ -58,11 +58,13 @@ export default class Main extends Component {
         return (
             <SafeAreaView style={{flex : 1}}>
             <View style={{flex : 0.2}}>
-                <Image 
-                    style={{width : 370, height : 120}}
-                    source={require('../assets/splash.png')}
-                    resizeMode='contain'
-                />
+                <ImageBackground source={require('../assets/background.png')} style={styles.backGroundHeader}>
+                    <Image 
+                        style={{width : 370, height : 120}}
+                        source={require('../assets/splash.png')}
+                        resizeMode='contain'
+                    />
+                </ImageBackground>
             </View>
             <View style={styles.wrapper}>
                 <View style={styles.headContainer}>
@@ -102,6 +104,11 @@ const styles = StyleSheet.create({
     wrapper : {
         flex : 1,
         backgroundColor: '#ffffff',
+    },
+    backGroundHeader : {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center"
     },
     headContainer : {
         flex : 1,
