@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, SafeAreaView, TextInput, Button, Alert, ActivityIndicator } from 'react-native'
+import { Text, StyleSheet, View,Image, SafeAreaView, TextInput, Button, Alert, ActivityIndicator } from 'react-native'
 
 import axios from 'axios';
 import pokemon from 'pokemon';
@@ -37,7 +37,8 @@ export default class Main extends Component {
                 pic: sprites.front_default,
                 types: this.getTypes(types),
                 desc: this.getDescription(flavor_text_entries),
-                isloading: false
+                isloading: false,
+                searchInput: ''
             })
         }
         catch (err) {
@@ -45,21 +46,25 @@ export default class Main extends Component {
         }
     }
 
-    getTypes = (types) => {
-        types.map(({slot, type}) => ({
+    getTypes = (types) => types.map(({slot, type}) => ({
             id : slot, 
             name: type.name
-        }))
-    }
+    }))
 
-    getDescription = (entries) => {
-        entries.find((item) => item.language.name === 'en').flavor_text
-    }
+    getDescription = (entries) => entries.find((item) => item.language.name === 'en').flavor_text;
 
     render() {
         const { isloading, searchInput, name, pic, types, desc} = this.state
         return (
-            <SafeAreaView style={styles.wrapper}>
+            <SafeAreaView style={{flex : 1}}>
+            <View style={{flex : 0.2}}>
+                <Image 
+                    style={{width : 370, height : 120}}
+                    source={require('../assets/splash.png')}
+                    resizeMode='contain'
+                />
+            </View>
+            <View style={styles.wrapper}>
                 <View style={styles.headContainer}>
                     <View style={styles.container}>
                         <View style={styles.containertxtInput}>
@@ -77,15 +82,17 @@ export default class Main extends Component {
                                 onPress={this.seachPokemon}
                             />
                         </View>
-
-                        <View style={styles.mainContainer}>
-                            {isloading && <ActivityIndicator size="large" color="#FF0000"/>}
-                            {!isloading && (
-                                <Pokemon name={name} pic={pic} types={types} desc={desc}/>
-                            )}
+                    </View>
+                    <View style={styles.mainContainer}>
+                        <View style={{marginTop : 20}}>
+                        {isloading && <ActivityIndicator size="large" color="#FEB900"/>}
+                        {!isloading && (
+                            <Pokemon name={name} pic={pic} types={types} desc={desc}/>
+                        )}
                         </View>
                     </View>
                 </View>
+            </View>
             </SafeAreaView>
         )
     }
@@ -94,13 +101,11 @@ export default class Main extends Component {
 const styles = StyleSheet.create({
     wrapper : {
         flex : 1,
-        backgroundColor: '#EAEAEA',
+        backgroundColor: '#ffffff',
     },
     headContainer : {
         flex : 1,
-        marginTop : 100,
         padding : 20,
-        borderWidth : 1
     },
     container : {
         flexDirection : 'row',
@@ -111,7 +116,6 @@ const styles = StyleSheet.create({
         height : 35,
         marginBottom : 10,
         borderColor : '#fee',
-        borderWidth : 1,
         backgroundColor : '#E1E1E1',
         paddingLeft : 10,
         borderRadius : 10
@@ -121,5 +125,11 @@ const styles = StyleSheet.create({
         height : 30,
         flex : 3
     },
-    containerbutton : {flex : 1}
+    containerbutton : {
+        flex : 1
+    },
+    mainContainer: {
+        flex : 1,
+        marginTop : 20,
+    }
   });
