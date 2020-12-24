@@ -16,7 +16,6 @@ export default class Main extends Component {
             name : '',
             pic : '',
             types : [],
-            weight : '',
             desc : ''
         }
     }
@@ -30,13 +29,12 @@ export default class Main extends Component {
             const { data : pokemonData} = await axios.get(`${POKE_API}/pokemon/${pokemonID}`)
             const { data : pokemonSpeciesData} = await axios.get(`${POKE_API}/pokemon-species/${pokemonID}`)
 
-            const { name, sprites, types, weight } = pokemonData
+            const { name, sprites, types } = pokemonData
             const { flavor_text_entries } = pokemonSpeciesData
 
             this.setState({
                 name,
-                weight,
-                pic: sprices.front_default,
+                pic: sprites.front_default,
                 types: this.getTypes(types),
                 desc: this.getDescription(flavor_text_entries),
                 isloading: false
@@ -49,7 +47,7 @@ export default class Main extends Component {
 
     getTypes = (types) => {
         types.map(({slot, type}) => ({
-            id : slot,
+            id : slot, 
             name: type.name
         }))
     }
@@ -59,22 +57,33 @@ export default class Main extends Component {
     }
 
     render() {
-        const { isloading, searchInput, name, pic, types, desc } = this.state
+        const { isloading, searchInput, name, pic, types, desc} = this.state
         return (
-            <SafeAreaView style={styles.container}>
-                <View style={{flexDirection : 'row'}}>
-                    <View style={{borderWidth : 1}}>
-                        <TextInput 
-                            placeholder='Search Pokemon'
-                            onChangeText={(searchInput) => this.setState({searchInput})}
-                            value={this.state.searchInput}
-                        />
-                    </View>
-                    <View style={{borderWidth : 1}}>
-                        <Button
-                            title='Search'
-                            color='#FF8B00'
-                        />
+            <SafeAreaView style={styles.wrapper}>
+                <View style={styles.headContainer}>
+                    <View style={styles.container}>
+                        <View style={styles.containertxtInput}>
+                            <TextInput 
+                                style={styles.textInput}
+                                placeholder='Search Pokemon'
+                                onChangeText={(searchInput) => this.setState({searchInput})}
+                                value={this.state.searchInput}
+                            />
+                        </View>
+                        <View style={styles.containerbutton}>
+                            <Button
+                                title='Search'
+                                color='#FF8B00'
+                                onPress={this.seachPokemon}
+                            />
+                        </View>
+
+                        <View style={styles.mainContainer}>
+                            {isloading && <ActivityIndicator size="large" color="#FF0000"/>}
+                            {!isloading && (
+                                <Pokemon name={name} pic={pic} types={types} desc={desc}/>
+                            )}
+                        </View>
                     </View>
                 </View>
             </SafeAreaView>
@@ -83,10 +92,34 @@ export default class Main extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#A5EAFD',
-    //   alignItems: 'center',
-    //   justifyContent: 'center',
+    wrapper : {
+        flex : 1,
+        backgroundColor: '#EAEAEA',
     },
+    headContainer : {
+        flex : 1,
+        marginTop : 100,
+        padding : 20,
+        borderWidth : 1
+    },
+    container : {
+        flexDirection : 'row',
+        alignItems : 'center', 
+        justifyContent : 'space-around'
+    },
+    textInput : {
+        height : 35,
+        marginBottom : 10,
+        borderColor : '#fee',
+        borderWidth : 1,
+        backgroundColor : '#E1E1E1',
+        paddingLeft : 10,
+        borderRadius : 10
+    },
+    containertxtInput : {
+        width : 200, 
+        height : 30,
+        flex : 3
+    },
+    containerbutton : {flex : 1}
   });
